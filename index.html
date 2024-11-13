@@ -14,6 +14,14 @@
       font-family: Arial, sans-serif;
     }
 
+    /* CSS básico para estilo e responsividade */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
     body {
       background-color: #1c1c1c;
       background-image: url('fundo.jpeg');
@@ -24,9 +32,55 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow-x: hidden;
-      overflow-y: auto;
+      padding: 20px;
+      overflow: hidden;
     }
+
+    /* Tela de introdução */
+    #intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+      animation: fadeOut 1s ease-in-out forwards 3s; /* Transição de saída após 3 segundos */
+    }
+    
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    /* Logo animado */
+    #intro-logo {
+      animation: fadeIn 1.5s ease;
+      width: 200px;
+      margin-bottom: 20px;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Conteúdo principal */
+    #main-content {
+      display: none;
+      animation: fadeInMain 1s ease forwards;
+    }
+
+    @keyframes fadeInMain {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+
+   
 
     /* Cabeçalho com logo centralizado */
     header {
@@ -388,7 +442,27 @@
     transition: transform 0.75s ease, opacity 0.75s ease;
 }
 
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
+    /* Corpo da página */
+    body {
+      background-color: #1c1c1c;
+      background-image: url('fundo.jpeg');
+      background-size: contain;
+      background-repeat: repeat;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
 
     /* Tela de introdução */
     #intro {
@@ -402,156 +476,92 @@
       justify-content: center;
       background: rgba(0, 0, 0, 0.9);
       z-index: 10000;
-      animation: fadeOut 1s ease-in-out forwards 4s;
+      animation: fadeOut 1s ease-in-out forwards 3s; /* Transição de saída após 3 segundos */
     }
+    
     @keyframes fadeOut {
       0% { opacity: 1; }
       100% { opacity: 0; visibility: hidden; }
     }
 
     /* Logo animado */
-    #logo {
-      animation: fadeIn 2s ease;
+    #intro-logo {
+      animation: fadeIn 1.5s ease;
       width: 200px;
       margin-bottom: 20px;
     }
+
     @keyframes fadeIn {
       0% { opacity: 0; transform: scale(0.5); }
       100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* Animação das camisetas voando */
-    .flying-shirt {
-      position: absolute;
-      width: 80px;
-      opacity: 0;
-      animation: fly 4s ease-in-out forwards;
-    }
-    .flying-shirt:nth-child(1) {
-      top: 50%;
-      left: 20%;
-      animation-delay: 1s;
-    }
-    .flying-shirt:nth-child(2) {
-      top: 10%;
-      left: 50%;
-      animation-delay: 1.5s;
-    }
-    .flying-shirt:nth-child(3) {
-      top: 30%;
-      right: 30%;
-      animation-delay: 2s;
-    }
-    @keyframes fly {
-      0% { opacity: 0; transform: scale(0) translateY(100px); }
-      50% { opacity: 1; transform: scale(1.2) translateY(-30px); }
-      100% { opacity: 0; transform: scale(0) translateY(100px); }
     }
 
     /* Conteúdo principal */
     #main-content {
       display: none;
       animation: fadeInMain 1s ease forwards;
+      width: 100%;
     }
+
     @keyframes fadeInMain {
       0% { opacity: 0; }
       100% { opacity: 1; }
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+    /* Conteúdo principal estilizado */
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 300px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    .product-section {
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .product-card {
+      background-color: #2a2a2a;
+      border-radius: 8px;
+      padding: 30px;
+      width: 300px;
+      margin-bottom: 20px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s;
     }
     
 
-    /* Tela de introdução */
-    #intro {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 10000;
-      animation: fadeOut 1s ease-in-out forwards 3s;
-    }
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
-    }
-
-    /* Logo animado */
-    #logo {
-      animation: fadeIn 1.5s ease;
-      width: 200px;
-      margin-bottom: 20px;
-    }
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: scale(0.5); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* Animação das camisetas voando */
-    .flying-shirt {
-      position: absolute;
-      width: 80px;
-      opacity: 0;
-      animation: fly 3s ease-in-out forwards;
-    }
-    .flying-shirt:nth-child(1) {
-      top: 50%;
-      left: 20%;
-      animation-delay: 1s;
-    }
-    .flying-shirt:nth-child(2) {
-      top: 10%;
-      left: 50%;
-      animation-delay: 1.5s;
-    }
-    .flying-shirt:nth-child(3) {
-      top: 30%;
-      right: 30%;
-      animation-delay: 2s;
-    }
-    @keyframes fly {
-      0% { opacity: 0; transform: scale(0) translateY(100px); }
-      50% { opacity: 1; transform: scale(1.2) translateY(-30px); }
-      100% { opacity: 0; transform: scale(0) translateY(100px); }
-    }
-
-    /* Conteúdo principal */
-    #main-content {
-      display: none;
-      animation: fadeInMain 1.5s ease forwards;
-    }
-    @keyframes fadeInMain {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
 
 
   </style>
 </head>
 <body>
-
     <!-- Tela de introdução -->
     <div id="intro">
-      <img src="catorze.logo.png" alt="Logo da CatorzeOrquídeas" id="logo">
-      <!--<img src="grande.frente.jpeg" class="flying-shirt"> -->
-     <!-- <img src="camiseta2.png" class="flying-shirt"> -->
-     <!-- <img src="camiseta3.png" class="flying-shirt"> -->
+      <img src="catorze.logo.png" alt="Logo da CatorzeOrquídeas" id="intro-logo">
     </div>
 
+      <!-- Conteúdo Principal -->
+      <div id="main-content">
+
     <!-- Cabeçalho com logo centralizado -->
-    <div id="main-content">
-      <header>
-        <img src="catorze.logo.png" alt="Logo da CatorzeOrquídeas" class="logo">
-      </header>
+    <header>
+      <img src="catorze.logo.png" alt="Logo da CatorzeOrquídeas" class="logo">
+      
+    </header>
   
   <!-- <p class="slogan">artes medíocres no abc / sp</p> -->
 
@@ -694,7 +704,6 @@
   </div>
 
   
-
   <script>
     let cart = [];
     let selectedSizes = {};
@@ -840,21 +849,19 @@ function addToCart(product) {
     const price = ["XGG", "G1", "G2", "G3"].includes(size) ? 87 : 80;
     cart.push({ product, size, price });
 
-    // Exibir a notificação
-   // showNotification(product + ' (' + size + ') adicionado ao carrinho!');
-
-    // Seleciona a imagem do produto específico clicado
+    // Seleciona a imagem atualmente visível do produto clicado
     const productCard = document.querySelector(`[data-product="${product}"]`);
-    const productImage = productCard.querySelector("img");
+    const sliderImages = productCard.querySelector(".slider-images");
+    const visibleImage = sliderImages.querySelector("img");
 
-    // Clona a imagem do produto
-    const flyingImage = productImage.cloneNode(true);
+    // Clona a imagem visível do produto
+    const flyingImage = visibleImage.cloneNode(true);
     flyingImage.classList.add("flying-item");
     flyingImage.style.position = "absolute";
     flyingImage.style.width = "100px"; // Tamanho desejado para a animação
 
     // Posição inicial da imagem clonada
-    const productImageRect = productImage.getBoundingClientRect();
+    const productImageRect = visibleImage.getBoundingClientRect();
     flyingImage.style.top = `${productImageRect.top + window.scrollY}px`;
     flyingImage.style.left = `${productImageRect.left + window.scrollX}px`;
     document.body.appendChild(flyingImage);
@@ -877,12 +884,12 @@ function addToCart(product) {
         flyingImage.remove();
     });
 }
-window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.getElementById("main-content").style.display = "block";
-      }, 3000); // Aparece após 3 segundos, tempo da animação
-    });
 
+ // Exibe o conteúdo principal após a animação de introdução
+ setTimeout(() => {
+      document.getElementById("main-content").style.display = "block";
+      document.body.style.overflowY = "auto"; // Permite a rolagem
+    }, 3000); // Exibe o site após 3 segundos
 
   </script>
 
@@ -890,7 +897,6 @@ window.addEventListener("load", () => {
   <img src="logo.jpg" alt="Logo da CatorzeOrquídeas" class="notification-logo">
   <span id="notification-text"></span>
 </div>
-
 
 </body>
 </html>

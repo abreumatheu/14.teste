@@ -14,73 +14,18 @@
       font-family: Arial, sans-serif;
     }
 
-    /* CSS básico para estilo e responsividade */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
     body {
       background-color: #1c1c1c;
-      background-image: url('fundo.jpeg');
-      background-size: contain;
-      background-repeat: repeat;
+      background-image: url('fundo.jpeg'); /* Caminho da imagem de fundo */
+      background-size: contain; /* Tamanho da imagem para uma repetição agradável */
+      background-repeat: repeat; /* Repete a imagem ao longo do fundo */
       color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      overflow: hidden;
     }
-
-    /* Tela de introdução */
-    #intro {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 10000;
-      animation: fadeOut 1s ease-in-out forwards 3s; /* Transição de saída após 3 segundos */
-    }
-    
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
-    }
-
-    /* Logo animado */
-    #intro-logo {
-      animation: fadeIn 1.5s ease;
-      width: 200px;
-      margin-bottom: 20px;
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: scale(0.5); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    /* Conteúdo principal */
-    #main-content {
-      display: none;
-      animation: fadeInMain 1s ease forwards;
-    }
-
-    @keyframes fadeInMain {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-
-   
 
     /* Cabeçalho com logo centralizado */
     header {
@@ -118,14 +63,14 @@
 
     
     .product-section {
-      width: 100%;
-      max-width: 900px; /* Aumenta a largura total da seção */
-      margin-bottom: 30px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
+      flex-wrap: nowrap; /* Não quebra os cards em linhas */
+      overflow-x: auto; /* Permite a rolagem horizontal */
+      scroll-behavior: smooth; /* Rolagem suave */
+      gap: 20px; /* Espaço entre os cards */
+      -webkit-overflow-scrolling: touch; /* Suporte para rolagem suave no iOS */
     }
+    
 
     .product-card {
       background-color: #2a2a2a;
@@ -135,6 +80,8 @@
       margin-bottom: 20px;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
       transition: transform 0.2s;
+      flex: 0 0 300px; /* Define a largura dos cards */
+
     }
 
 
@@ -442,120 +389,217 @@
     transition: transform 0.75s ease, opacity 0.75s ease;
 }
 
-* {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+ /* Estilo do balão de notificação */
+ .cart-bubble {
+      position: absolute;
+      top: -35px; /* Para o balão ficar mais acima do carrinho */
+      right: -10px;
+      background-color: #fff; /* Contraste com fundo preto */
+      color: #1c1c1c;
+      padding: 8px 12px;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra para destaque */
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(10px); /* Animação de entrada sutil */
     }
 
-    /* Corpo da página */
-    body {
-      background-color: #1c1c1c;
-      background-image: url('fundo.jpeg');
-      background-size: contain;
-      background-repeat: repeat;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      overflow-x: hidden;
+    .cart-bubble.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0); /* Transição suave ao aparecer */
     }
 
-    /* Tela de introdução */
-    #intro {
+    /* Botão flutuante do carrinho */
+    .floating-pre-order-btn {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ffa500;
+      color: #1c1c1c;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 10000;
-      animation: fadeOut 1s ease-in-out forwards 3s; /* Transição de saída após 3 segundos */
-    }
-    
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      transition: background-color 0.3s;
     }
 
-    /* Logo animado */
-    #intro-logo {
-      animation: fadeIn 1.5s ease;
-      width: 200px;
-      margin-bottom: 20px;
+    .floating-pre-order-btn:hover {
+      background-color: #ff8700;
     }
 
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: scale(0.5); }
-      100% { opacity: 1; transform: scale(1); }
+    .footer-text {
+    color: black;
+  }
+
+   /* Botão de Fechar */
+   .close-btn {
+    background-color: #ccc;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    color: #1c1c1c;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+
+  .close-btn:hover {
+    background-color: #bbb;
+  }
+
+  /* Botão de Finalizar Compra */
+  .finalize-btn {
+    background-color: #ffa500;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    color: #1c1c1c;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 4px 10px rgba(255, 165, 0, 0.5);
+    animation: pulse 2s infinite ease-in-out;
+    transition: transform 0.2s;
+  }
+
+  .finalize-btn:hover {
+    transform: scale(1.1);
+    background-color: #ff8700;
+  }
+
+  /* Animação de Pulso */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 4px 10px rgba(255, 165, 0, 0.5);
     }
-
-    /* Conteúdo principal */
-    #main-content {
-      display: none;
-      animation: fadeInMain 1s ease forwards;
-      width: 100%;
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 6px 14px rgba(255, 165, 0, 0.7);
     }
-
-    @keyframes fadeInMain {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 4px 10px rgba(255, 165, 0, 0.5);
     }
+  }
 
-    /* Conteúdo principal estilizado */
-    header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
+   /* Estilo do balão de mensagem */
+   .size-warning {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #ff5f6d, #ffc371);
+    color: #1c1c1c;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    display: none;
+    z-index: 1001;
+  }
 
-    .logo {
-      width: 300px;
-      height: auto;
-      margin-bottom: 10px;
-    }
+  /* Efeito de tremor */
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
+  }
 
-    .product-section {
-      width: 100%;
-      max-width: 900px;
-      margin-bottom: 30px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
+  .shake {
+    animation: shake 0.5s ease-in-out;
+  }
+  /* Estilo do balão de mensagem */
+.size-warning {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #ff5f6d, #ffc371);
+  color: #1c1c1c;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  display: none; /* Inicialmente oculto */
+  z-index: 1001;
+  animation: fadeInOut 3s ease;
+}
 
-    .product-card {
-      background-color: #2a2a2a;
-      border-radius: 8px;
-      padding: 30px;
-      width: 300px;
-      margin-bottom: 20px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-      transition: transform 0.2s;
-    }
-    
+/* Animação suave de entrada e saída */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  10%, 90% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+}
 
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #333;
+  border-radius: 8px;
+}
 
+.cart-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.cart-item .remove-btn {
+  background-color: #ff5f6d;
+  color: #fff;
+  border: none;
+  border-radius: 50%; /* Deixa o botão redondo */
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: 50px;
+  height: 50px; /* Altura do botão */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  margin-left: auto;
+}
+
+.cart-item .remove-btn:hover {
+  transform: scale(1.2); /* Efeito de zoom ao passar o mouse */
+  background-color: #ff3b4f; /* Cor ao passar o mouse */
+}
+</style>
 
   </style>
 </head>
 <body>
-    <!-- Tela de introdução -->
-    <div id="intro">
-      <img src="catorze.logo.png" alt="Logo da CatorzeOrquídeas" id="intro-logo">
-    </div>
-
-      <!-- Conteúdo Principal -->
-      <div id="main-content">
 
     <!-- Cabeçalho com logo centralizado -->
     <header>
@@ -570,6 +614,9 @@
     <img src="banner.jpg" alt="Pré-Venda Exclusiva" style="width: 100%;">
   </div>
 -->
+<div style="position: relative; width: 100%; max-width: 900px; margin-bottom: 30px;">
+  <!-- Seta para a esquerda -->
+  <div style="position: absolute; top: 50%; left: 10px; z-index: 10; cursor: pointer; color: #ffa500; font-size: 2rem;" onclick="scrollLeft()">&#10094;</div>
 
   <!-- Seção dos Produtos -->
   <div class="product-section">
@@ -662,14 +709,18 @@
       </div>
       <button class="add-to-cart" onclick="addToCart('Dentre os grandes, és o primeiro')">Adicionar ao Carrinho</button>
     </div>
-  </div>
+
+    <div style="position: absolute; top: 50%; right: 10px; z-index: 10; cursor: pointer; color: #ffa500; font-size: 2rem;" onclick="scrollRight()">&#10095;</div>
 
   </div>
 
-    <!-- Botão Flutuante de Pré-Venda -->
-    <button class="floating-pre-order-btn" onclick="openCartModal()">
-        <i class="fas fa-shopping-cart"></i>
-      </button>
+  </div>
+
+    <!-- Botão Flutuante de Pré-Venda com balão de notificação -->
+  <button class="floating-pre-order-btn" onclick="openCartModal()">
+      <i class="fas fa-shopping-cart"></i>
+      <div id="cartBubble" class="cart-bubble">Ver carrinho</div>
+  </button>
 
   <!-- Botão WhatsApp -->
   <button class="whatsapp-btn" onclick="openWhatsApp()">
@@ -681,13 +732,13 @@
     <i class="fab fa-instagram"></i>
   </button>
 
-  <!-- Modal do Carrinho -->
   <div id="cartModal" class="modal">
     <div class="modal-content">
       <h2>Itens no Carrinho</h2>
       <div id="cartItems"></div>
-      <button class="close-btn" onclick="closeCartModal()">Fechar</button>
-      <button class="close-btn" onclick="sendPreOrder()">Realizar Pré-Venda</button>
+      <p id="cartTotal" style="margin-top: 10px; font-weight: bold;">Total: R$0,00</p>
+      <button class="close-btn" onclick="closeCartModal()">Voltar</button>
+      <button class="finalize-btn" onclick="sendPreOrder()">Finalizar Compra</button>
     </div>
   </div>
 
@@ -703,7 +754,6 @@
     <img id="modalImage" src="">
   </div>
 
-  
   <script>
     let cart = [];
     let selectedSizes = {};
@@ -714,6 +764,12 @@
       sizeButtons.forEach(btn => btn.classList.remove('selected'));
       buttonElement.classList.add('selected');
     }
+    
+    const productImages = {
+  "Quebra Mar": "quebra.frente.jpeg",
+  "Paulo Beto": "paulo.frente.jpeg",
+  "Dentre os grandes, és o primeiro": "grande.frente.jpeg"
+};
 
     function addToCart(product) {
   const size = selectedSizes[product];
@@ -724,26 +780,69 @@
 
       const price = ["XGG", "G1", "G2", "G3"].includes(size) ? 87 : 80;
       cart.push({ product, size, price });
+      // Exibe o balão de notificação
+      showCartBubble();
+      updateCartTotal();
+
+    
       alert(product + ' (' + size + ') adicionado ao carrinho!');
     }
 
-    function openCartModal() {
-      const cartModal = document.getElementById("cartModal");
-      const cartItemsDiv = document.getElementById("cartItems");
-
-      cartItemsDiv.innerHTML = '';
-      if (cart.length === 0) {
-        cartItemsDiv.innerHTML = "<p>O carrinho está vazio.</p>";
-      } else {
-        cart.forEach(item => {
-          const itemElement = document.createElement("div");
-          itemElement.classList.add("cart-item");
-          itemElement.textContent = `${item.product} - Tamanho: ${item.size} - Preço: R$${item.price}`;
-          cartItemsDiv.appendChild(itemElement);
-        });
-      }
-      cartModal.style.display = "flex";
+    function updateCartTotal() {
+    const total = cart.reduce((acc, item) => acc + item.price, 0);
+    document.getElementById("cartTotal").textContent = `Total: R$${total.toFixed(2)}`;
     }
+
+    function openCartModal() {
+  const cartModal = document.getElementById("cartModal");
+  const cartItemsDiv = document.getElementById("cartItems");
+
+  cartItemsDiv.innerHTML = '';
+  if (cart.length === 0) {
+    cartItemsDiv.innerHTML = "<p>O carrinho está vazio.</p>";
+  } else {
+    cart.forEach(item => {
+      const itemContainer = document.createElement("div");
+      itemContainer.classList.add("cart-item");
+
+      // Adiciona a imagem do produto
+      const img = document.createElement("img");
+      img.src = productImages[item.product]; // Caminho direto para o arquivo
+      img.alt = item.product;
+      img.style.width = "50px";
+      img.style.height = "50px";
+      img.style.borderRadius = "8px";
+      img.style.marginRight = "10px";
+
+      // Adiciona o texto do item
+      const text = document.createElement("span");
+      text.textContent = `${item.product} - Tamanho: ${item.size} - Preço: R$${item.price}`;
+
+      // Adiciona o botão de remover
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "X";
+      removeBtn.style.marginLeft = "10px";
+      removeBtn.style.backgroundColor = "#ff5f6d";
+      removeBtn.style.color = "#fff";
+      removeBtn.style.border = "none";
+      removeBtn.style.borderRadius = "4px";
+      removeBtn.style.cursor = "pointer";
+      removeBtn.onclick = () => {
+        cart = cart.filter(cartItem => cartItem !== item);
+        openCartModal(); // Atualiza o modal do carrinho
+      };
+
+      // Monta o item do carrinho
+      itemContainer.appendChild(img);
+      itemContainer.appendChild(text);
+      itemContainer.appendChild(removeBtn);
+      cartItemsDiv.appendChild(itemContainer);
+    });
+  }
+  cartModal.style.display = "flex";
+  updateCartTotal(); // Atualiza o valor total ao abrir o modal
+}
+  
 
     function closeCartModal() {
       document.getElementById("cartModal").style.display = "none";
@@ -755,11 +854,17 @@
         return;
       }
 
-      const message = cart.map(item => `${item.product} (${item.size}): R$${item.price}`).join('\n');
-      const whatsappLink = `https://wa.me/5511958731426?text=${encodeURIComponent(message)}`;
-      window.open(whatsappLink, '_blank');
-      closeCartModal();
-    }
+      const total = cart.reduce((acc, item) => acc + item.price, 0);
+    const message = `
+    Olá, tudo bem? Gostaria de realizar a compra na pré-venda, das seguintes camisetas:
+    ${cart.map(item => `- ${item.product} (Tamanho: ${item.size}): R$${item.price.toFixed(2)}`).join('\n')}
+    
+    Total: R$${total.toFixed(2)}
+    `;
+    const whatsappLink = `https://wa.me/5511958731426?text=${encodeURIComponent(message)}`;
+    window.open(whatsappLink, '_blank');
+    closeCartModal();
+}
 
     function openWhatsApp() {
       const whatsappLink = `https://wa.me/5511958731426`;
@@ -840,56 +945,108 @@ function showNotification(message) {
 }
 
 function addToCart(product) {
-    const size = selectedSizes[product];
-    if (!size) {
-        alert("Por favor, selecione um tamanho para " + product);
-        return;
-    }
+  const size = selectedSizes[product];
+  if (!size) {
+    showSizeWarning(); // Exibe o balão de aviso
+    return;
+  }
 
     const price = ["XGG", "G1", "G2", "G3"].includes(size) ? 87 : 80;
     cart.push({ product, size, price });
 
-    // Seleciona a imagem atualmente visível do produto clicado
+     // Exibe o balão de notificação
+     showCartBubble();
+
+    // Identifica a imagem atualmente visível do produto clicado
     const productCard = document.querySelector(`[data-product="${product}"]`);
     const sliderImages = productCard.querySelector(".slider-images");
-    const visibleImage = sliderImages.querySelector("img");
+    const visibleImageIndex = parseInt(sliderImages.getAttribute('data-current-slide')) || 0;
+    const visibleImage = sliderImages.children[visibleImageIndex];
 
     // Clona a imagem visível do produto
     const flyingImage = visibleImage.cloneNode(true);
     flyingImage.classList.add("flying-item");
-    flyingImage.style.position = "absolute";
-    flyingImage.style.width = "100px"; // Tamanho desejado para a animação
 
-    // Posição inicial da imagem clonada
-    const productImageRect = visibleImage.getBoundingClientRect();
-    flyingImage.style.top = `${productImageRect.top + window.scrollY}px`;
-    flyingImage.style.left = `${productImageRect.left + window.scrollX}px`;
+    // Adiciona a imagem clonada ao body para animação
     document.body.appendChild(flyingImage);
 
-    // Define a posição final do ícone do carrinho
+    // Define a posição inicial da imagem clonada usando as coordenadas da imagem visível
+    const productImageRect = visibleImage.getBoundingClientRect();
+    flyingImage.style.position = "absolute";
+    flyingImage.style.top = `${productImageRect.top + window.scrollY}px`;
+    flyingImage.style.left = `${productImageRect.left + window.scrollX}px`;
+    flyingImage.style.width = "100px"; // Ajusta o tamanho para a animação
+
+    // Define a posição final para o ícone do carrinho
     const cartIcon = document.querySelector(".floating-pre-order-btn");
     const cartIconRect = cartIcon.getBoundingClientRect();
     const targetX = cartIconRect.left + window.scrollX;
     const targetY = cartIconRect.top + window.scrollY;
 
-    // Calcula a transformação para mover a imagem até o carrinho
+    // Anima a imagem clonada para o ícone do carrinho
+    flyingImage.style.transition = "transform 1.5s ease, opacity 1.5s ease";
     const translateX = targetX - (productImageRect.left + window.scrollX);
     const translateY = targetY - (productImageRect.top + window.scrollY);
-    flyingImage.style.transition = "transform 1.5s ease, opacity 1.5s ease";
     flyingImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(0.1)`;
     flyingImage.style.opacity = "0.5";
 
-    // Remove a imagem da tela após a animação
+    // Remove a imagem clonada após a animação
     flyingImage.addEventListener("transitionend", () => {
         flyingImage.remove();
     });
 }
 
- // Exibe o conteúdo principal após a animação de introdução
- setTimeout(() => {
-      document.getElementById("main-content").style.display = "block";
-      document.body.style.overflowY = "auto"; // Permite a rolagem
-    }, 3000); // Exibe o site após 3 segundos
+function showCartBubble() {
+      const cartBubble = document.getElementById("cartBubble");
+      cartBubble.classList.add("show");
+
+      // Esconde o balão após 3 segundos
+      setTimeout(() => {
+        cartBubble.classList.remove("show");
+      }, 3000);
+    }
+
+    function showSizeWarning() {
+  const sizeWarning = document.getElementById("sizeWarning");
+
+  // Mostra o balão
+  sizeWarning.style.display = "block";
+
+  // Esconde o balão automaticamente após 3 segundos
+  setTimeout(() => {
+    sizeWarning.style.display = "none";
+  }, 3000);
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1); // Remove o item pelo índice
+  openCartModal(); // Reabre o modal para atualizar os itens
+  updateCartTotal(); // Atualiza o total
+}
+
+
+let startX; // Coordenada inicial do toque
+let scrollStart; // Posição inicial do scroll
+
+const productSection = document.querySelector('.product-section');
+
+// Função para iniciar o swipe
+productSection.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].pageX; // Coordenada inicial do toque
+  scrollStart = productSection.scrollLeft; // Posição inicial do scroll
+});
+
+// Função para mover durante o swipe
+productSection.addEventListener('touchmove', (e) => {
+  const deltaX = e.touches[0].pageX - startX; // Diferença entre a posição inicial e a atual
+  productSection.scrollLeft = scrollStart - deltaX; // Ajusta o scroll conforme o movimento
+});
+
+// Função para ajustar após o swipe (opcional)
+productSection.addEventListener('touchend', () => {
+  // Aqui você pode adicionar lógica para ajustar a posição ao final do swipe, se necessário
+});
+
 
   </script>
 
@@ -898,5 +1055,8 @@ function addToCart(product) {
   <span id="notification-text"></span>
 </div>
 
+<!-- Balão de aviso -->
+<div id="sizeWarning" class="size-warning">Opsss.. selecione um tamanho antes 😉 </div>
+  
 </body>
 </html>

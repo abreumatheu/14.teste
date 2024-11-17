@@ -63,14 +63,17 @@
 
     
     .product-section {
+      width: 100%;
+      max-width: 900px; /* Aumenta a largura total da seção */
+      margin-bottom: 30px;
       display: flex;
-      flex-wrap: nowrap; /* Não quebra os cards em linhas */
-      overflow-x: auto; /* Permite a rolagem horizontal */
-      scroll-behavior: smooth; /* Rolagem suave */
-      gap: 20px; /* Espaço entre os cards */
-      -webkit-overflow-scrolling: touch; /* Suporte para rolagem suave no iOS */
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      display: flex;
+     overflow-x: auto; /* Adiciona a rolagem horizontal */
+      scroll-behavior: smooth; /* Para uma rolagem suave */
     }
-    
 
     .product-card {
       background-color: #2a2a2a;
@@ -80,8 +83,6 @@
       margin-bottom: 20px;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
       transition: transform 0.2s;
-      flex: 0 0 300px; /* Define a largura dos cards */
-
     }
 
 
@@ -595,11 +596,106 @@
   transform: scale(1.2); /* Efeito de zoom ao passar o mouse */
   background-color: #ff3b4f; /* Cor ao passar o mouse */
 }
+
+/* Overlay para a demonstração */
+.demo-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Fundo translúcido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Acima de outros elementos */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.demo-overlay.show {
+  visibility: visible;
+  opacity: 1; /* Exibe o overlay */
+}
+
+/* Conteúdo de demonstração */
+.demo-content {
+  position: absolute;
+  bottom: 20%;
+  text-align: center;
+  color: #fff;
+  z-index: 2100;
+}
+
+/* Texto da demonstração */
+.demo-text {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  animation: fadeInOut 2s infinite; /* Efeito de piscar */
+}
+
+/* Setas de navegação */
+.demo-arrow {
+  width: 40px;
+  height: 40px;
+  border: solid 4px transparent;
+  border-radius: 50%;
+  position: absolute;
+  animation: bounce 1.5s infinite ease-in-out;
+}
+
+.demo-arrow-left {
+  border-right-color: #ffa500;
+  transform: rotate(45deg);
+  left: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.demo-arrow-right {
+  border-left-color: #ffa500;
+  transform: rotate(-45deg);
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Animação para piscar */
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Animação de pular */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 </style>
 
   </style>
 </head>
 <body>
+
+  <div id="demoOverlay" class="demo-overlay">
+    <div class="demo-content">
+      <p class="demo-text">Deslize para explorar! 👈👉</p>
+      <div class="demo-arrow-container">
+        <i class="fas fa-arrow-left demo-arrow-left"></i>
+        <i class="fas fa-arrow-right demo-arrow-right"></i>
+      </div>
+    </div>
+  </div>
 
     <!-- Cabeçalho com logo centralizado -->
     <header>
@@ -614,12 +710,9 @@
     <img src="banner.jpg" alt="Pré-Venda Exclusiva" style="width: 100%;">
   </div>
 -->
-<div style="position: relative; width: 100%; max-width: 900px; margin-bottom: 30px;">
-  <!-- Seta para a esquerda -->
-  <div style="position: absolute; top: 50%; left: 10px; z-index: 10; cursor: pointer; color: #ffa500; font-size: 2rem;" onclick="scrollLeft()">&#10094;</div>
 
   <!-- Seção dos Produtos -->
-  <div class="product-section">
+  <div class="product-section" id="productSection">
 
 <!-- Modelo 1 -->
 <div class="product-card" data-product="Quebra Mar">
@@ -709,9 +802,6 @@
       </div>
       <button class="add-to-cart" onclick="addToCart('Dentre os grandes, és o primeiro')">Adicionar ao Carrinho</button>
     </div>
-
-    <div style="position: absolute; top: 50%; right: 10px; z-index: 10; cursor: pointer; color: #ffa500; font-size: 2rem;" onclick="scrollRight()">&#10095;</div>
-
   </div>
 
   </div>
@@ -1024,27 +1114,37 @@ function removeFromCart(index) {
   updateCartTotal(); // Atualiza o total
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  if (!localStorage.getItem('demoShown')) {
+    const demoOverlay = document.getElementById('demoOverlay');
+    const productSection = document.getElementById('productSection');
 
-let startX; // Coordenada inicial do toque
-let scrollStart; // Posição inicial do scroll
+    demoOverlay.classList.add('show'); // Exibe o overlay
 
-const productSection = document.querySelector('.product-section');
+    const maxScroll = productSection.scrollWidth - productSection.clientWidth; // Calcula o limite de scroll
+    const scrollSpeed = 300; // Distância a rolar por passo
+    const intervalTime = 1000; // Intervalo entre os passos
+    let currentScroll = 0; // Controle da posição atual
 
-// Função para iniciar o swipe
-productSection.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].pageX; // Coordenada inicial do toque
-  scrollStart = productSection.scrollLeft; // Posição inicial do scroll
-});
+    // Inicia a demonstração automática
+    const scrollDemo = setInterval(() => {
+      if (currentScroll >= maxScroll) {
+        clearInterval(scrollDemo);
+        demoOverlay.classList.remove('show');
+        localStorage.setItem('demoShown', 'true');
+      } else {
+        productSection.scrollBy({ left: scrollSpeed, behavior: 'smooth' });
+        currentScroll += scrollSpeed;
+      }
+    }, intervalTime);
 
-// Função para mover durante o swipe
-productSection.addEventListener('touchmove', (e) => {
-  const deltaX = e.touches[0].pageX - startX; // Diferença entre a posição inicial e a atual
-  productSection.scrollLeft = scrollStart - deltaX; // Ajusta o scroll conforme o movimento
-});
-
-// Função para ajustar após o swipe (opcional)
-productSection.addEventListener('touchend', () => {
-  // Aqui você pode adicionar lógica para ajustar a posição ao final do swipe, se necessário
+    // Fecha manualmente se o usuário clicar no overlay
+    demoOverlay.addEventListener('click', () => {
+      clearInterval(scrollDemo);
+      demoOverlay.classList.remove('show');
+      localStorage.setItem('demoShown', 'true');
+    });
+  }
 });
 
 
